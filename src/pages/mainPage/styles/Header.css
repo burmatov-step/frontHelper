@@ -1,0 +1,39 @@
+.header{
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    background-color: #11161E;
+    color: #76869F;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.container{
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-item{
+    display: flex;
+}
+
+.header-item div{
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.header-item div:hover{
+    color: #5CA35B;
+}
+
+.header-item div + div{
+    margin-left: 70px;
+}

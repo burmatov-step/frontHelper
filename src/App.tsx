@@ -3,7 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '.';
 import LoginForm from './components/LoginForm';
 import { IUser } from './models/IUser';
+import MainPage from './pages/mainPage/MainPage';
 import UserService from './services/UserService';
+import './styles/App.css'
 
 function App() {
     const {store} = useContext(Context);
@@ -29,11 +31,11 @@ function App() {
 
   if(!store.isAuth){
     return(
-      
-      <div>
-        <LoginForm/>
-        <button onClick={getUsers}>Получить список пользователей</button>
-      </div>
+      <MainPage />
+      // <div>
+      //   <LoginForm/>
+      //   <button onClick={getUsers}>Получить список пользователей</button>
+      // </div>
       
     )
   }
