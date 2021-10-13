@@ -1,0 +1,14 @@
+.mainHeader{
+    height: 70px;
+    background-color: #11161E;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.mainHeader__info{
+    color: white;
+    margin-right: 30px;
+    font-size: 20px;
+}
+

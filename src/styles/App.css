@@ -6,3 +6,13 @@
 li{
     list-style: none;
 }
+
+.sidebar{
+    width: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #313c4d;
+    padding-top: 70px;
+}

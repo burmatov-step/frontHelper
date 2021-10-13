@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '.';
+import HeaderMain from './components/HeaderMain';
 import LoginForm from './components/LoginForm';
+import SideBar from './components/SideBar';
 import { IUser } from './models/IUser';
 import MainPage from './pages/mainPage/MainPage';
 import UserService from './services/UserService';
@@ -10,6 +12,7 @@ import './styles/App.css'
 function App() {
     const {store} = useContext(Context);
     const [users, setUsers] = useState<IUser[]>([])
+    console.log(users)
   useEffect(()=>{
     if(localStorage.getItem('token')){
       store.checkAuth()
@@ -32,16 +35,13 @@ function App() {
   if(!store.isAuth){
     return(
       <MainPage />
-      // <div>
-      //   <LoginForm/>
-      //   <button onClick={getUsers}>Получить список пользователей</button>
-      // </div>
-      
     )
   }
   return (
     <div >
-      <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
+      <HeaderMain email={store.user.email} />
+      <SideBar />
+      {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>
       <button onClick={() => store.logout()} >Выйти</button>
       <div>
@@ -49,7 +49,7 @@ function App() {
       </div>
       {users.map(user =>{
         return <div key={user.email}>{user.email}</div>
-      })}
+      })} */}
     </div>
   );
 }
