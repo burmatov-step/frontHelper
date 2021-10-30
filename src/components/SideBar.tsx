@@ -6,7 +6,7 @@ import '../styles/HeaderMain.css'
 const SideBar: FC<any> = (props) =>{
     return(
         <div className='sidebar'>
-            <ul>
+            <ul className='sidebar-menu'>
                 <li>Слежка</li>
                 <li>Посты</li>
                 <li>авав</li>

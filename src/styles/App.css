@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 li{
     list-style: none;
@@ -13,6 +14,16 @@ li{
     left: 0;
     top: 0;
     bottom: 0;
-    background-color: #313c4d;
+    background-color: #474c50;
     padding-top: 70px;
+    color: white;
+}
+
+.sidebar-menu {
+    margin-top: 20px;
+}
+
+.sidebar-menu li{
+    text-align: center;
+    margin-bottom: 20px;
 }

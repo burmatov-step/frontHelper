@@ -5,6 +5,7 @@ import HeaderMain from './components/HeaderMain';
 import LoginForm from './components/LoginForm';
 import SideBar from './components/SideBar';
 import { IUser } from './models/IUser';
+import FollowPosts from './pages/followPosts/FollowPosts';
 import MainPage from './pages/mainPage/MainPage';
 import UserService from './services/UserService';
 import './styles/App.css'
@@ -41,6 +42,7 @@ function App() {
     <div >
       <HeaderMain email={store.user.email} />
       <SideBar />
+      <FollowPosts />
       {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>
       <button onClick={() => store.logout()} >Выйти</button>

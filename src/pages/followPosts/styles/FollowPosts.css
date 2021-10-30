@@ -1,0 +1,39 @@
+.FollowPosts{
+    background: rgb(47, 52, 55);
+    margin-left: 100px;
+    color: #b8babb;
+    
+}
+
+.allPosts{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 15px 0px 15px 15px;
+}
+
+.find-acount{
+    max-width: 300px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.find-acount__label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.find-acount input{
+    height: 35px;
+}
+
+.allAcounts{
+    max-width: 200px;
+    width: 100%;
+}
+
+.allAcounts-textarea{
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
