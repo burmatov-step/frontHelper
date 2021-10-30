@@ -13,7 +13,6 @@ import './styles/App.css'
 function App() {
     const {store} = useContext(Context);
     const [users, setUsers] = useState<IUser[]>([])
-    console.log(users)
   useEffect(()=>{
     if(localStorage.getItem('token')){
       store.checkAuth()
@@ -42,7 +41,7 @@ function App() {
     <div >
       <HeaderMain email={store.user.email} />
       <SideBar />
-      <FollowPosts />
+      <FollowPosts userId={store.user.id} />
       {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>
       <button onClick={() => store.logout()} >Выйти</button>
