@@ -1,7 +1,7 @@
 import React, {FC, useContext, useState} from "react";
 import Post from "../followPosts/components/Post";
 import './styles/FollowPosts.css'
-
+import { AiOutlineDelete } from "react-icons/ai";
 const FollowPosts: FC = () =>{
     const example = {
         id: "17909107157049518",
@@ -42,24 +42,22 @@ const FollowPosts: FC = () =>{
                     </button>
                 </div>
             </div>
+            <div className="allAcounts-title">
+                    Все аккаунты
+            </div>
             <div className="allAcounts">
-                <textarea className='allAcounts-textarea' disabled placeholder='Список аккаунтов'></textarea>
+                <div className="accaunt-wrapper">
+                    <div className="accaunt-name">
+                        mama.kulinarr
+                    </div>
+                    <div className="accaunt-del"><AiOutlineDelete /></div>
+                </div>
             </div>
             <button>Получить посты</button>
             <div className="allPosts">
 
                 <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
-                <Post {...example} />
+
             </div>
         </div>
     )

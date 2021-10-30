@@ -28,12 +28,19 @@
 }
 
 .allAcounts{
-    max-width: 200px;
+    max-width: 160px;
     width: 100%;
+    background-color: #ccc;
+    color: #000;
+    height: 100px;
+    overflow-y: scroll;
 }
 
-.allAcounts-textarea{
-    width: 100%;
-    height: 100px;
-    resize: none;
+.accaunt-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.accaunt-del{
+    cursor: pointer;
 }

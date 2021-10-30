@@ -1,6 +1,7 @@
-import React, {Children, FC, useContext, useState} from "react";
+import React, { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Pagination } from 'swiper';
+import $api from '../../../http/index'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import '../styles/Post.css'
@@ -53,8 +54,10 @@ const Post: FC<any> = (example) =>{
                 {example.caption}
             </div>
             <div className="planning">
-                <button>
-                    Запланировать
+                <button onClick={async () =>{
+                   const response = await $api.post('/save_video', {link: example['media_url']})
+                }}>
+                    Скачать
                 </button>
             </div>
         </div>
