@@ -9,7 +9,6 @@ import { AiFillLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 
 const Post: FC<any> = (example) =>{
-    console.log(example)
     SwiperCore.use([Pagination])
     return(
         <div className='post'>
@@ -17,7 +16,7 @@ const Post: FC<any> = (example) =>{
              <Swiper
                 pagination={{ clickable: true }}
                 >
-                {example.children ? example.children.map((children: any) =>{
+                {example.children ? example.children.data.map((children: any) =>{
                     if(children.media_type == 'VIDEO'){
                        return <SwiperSlide>
                             <video controls width="250">

@@ -13,6 +13,7 @@ import './styles/App.css'
 function App() {
     const {store} = useContext(Context);
     const [users, setUsers] = useState<IUser[]>([])
+    const [dataFacebook, setdataFacebook] = useState({})
   useEffect(()=>{
     if(localStorage.getItem('token')){
       store.checkAuth()
@@ -37,11 +38,12 @@ function App() {
       <MainPage />
     )
   }
+
   return (
     <div >
-      <HeaderMain email={store.user.email} />
+      <HeaderMain dataFacebook={dataFacebook} setDataFacebook={setdataFacebook} email={store.user.email} />
       <SideBar />
-      <FollowPosts userId={store.user.id} />
+      <FollowPosts dataFacebook={dataFacebook}  userId={store.user.id} />
       {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>
       <button onClick={() => store.logout()} >Выйти</button>

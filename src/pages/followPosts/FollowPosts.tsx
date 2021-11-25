@@ -1,40 +1,45 @@
 import React, {FC, useContext, useEffect, useState} from "react";
+import { observer } from 'mobx-react-lite';
 import Post from "../followPosts/components/Post";
+import { Context } from '../../index';
 import './styles/FollowPosts.css'
 import $api from '../../http/index'
 import { AiOutlineDelete } from "react-icons/ai";
 import { AxiosResponse } from "axios";
 const FollowPosts: FC<any> = (props) =>{
+    const {store} = useContext(Context);
     const [loginAccount, setLoginAccount] = useState('')
     const [allLoginAccount, setAllLoginAccount] = useState([])
-    const example = {
-        id: "17909107157049518",
-        caption: "🔥ПРОЖИГАЕМ ПРЕСС🔥\n⠀\nКто сохранил треню и не написал \"СПАСИБО\" в комментариях👇🏼👇🏼👇🏼",
-        children: [
-            {
-                id: "17895656006488883",
-                media_type: "VIDEO",
-                media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
-            },
-            {
-                id: "17895656006488883",
-                media_type: "VIDEO",
-                media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
-            },
-            {
-                id: "17895656006488883",
-                media_type: "VIDEO",
-                media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
-            },
-        ],
-        media_type: "CAROUSEL_ALBUM",
-        comments_count: 34,
-        like_count: 1240,
-        media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3"
-    }
+    const [allPosts, setallPosts] = useState([])
+    // const example = {
+    //     id: "17909107157049518",
+    //     caption: "🔥ПРОЖИГАЕМ ПРЕСС🔥\n⠀\nКто сохранил треню и не написал \"СПАСИБО\" в комментариях👇🏼👇🏼👇🏼",
+    //     children: [
+    //         {
+    //             id: "17895656006488883",
+    //             media_type: "VIDEO",
+    //             media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
+    //         },
+    //         {
+    //             id: "17895656006488883",
+    //             media_type: "VIDEO",
+    //             media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
+    //         },
+    //         {
+    //             id: "17895656006488883",
+    //             media_type: "VIDEO",
+    //             media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3",
+    //         },
+    //     ],
+    //     media_type: "CAROUSEL_ALBUM",
+    //     comments_count: 34,
+    //     like_count: 1240,
+    //     media_url: "https://scontent.cdninstagram.com/v/t50.2886-16/246840529_906395283614011_3842844880581326350_n.mp4?_nc_cat=107&vs=18262844323009172_3691616465&_nc_vs=HBksFQAYJEdORjh0ZzQ3NmVlWVhEZ0RBQTUyX2dFUGgxUTFia1lMQUFBRhUAAsgBABUAGCRHRFA2c2c2NG5MNGJ3QUlEQURhNkR1TUIxMGNpYmtZTEFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMRUAACaq%2B%2BXlsuPbPxUCKAJDMywXQEwAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAde4HAA%3D%3D&ccb=1-5&_nc_sid=59939d&efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jYXJvdXNlbF9pdGVtIn0%3D&_nc_ohc=LLgWfuhLaqoAX95lRAa&_nc_ht=video-hel3-1.cdninstagram.com&edm=AL-3X8kEAAAA&oh=80c9e24c26819f736165c410d261ed36&oe=6176BC78&_nc_vts_prog=1&vts=1&_nc_rid=c4068ef2d3"
+    // }
+
     const getAllNameAccount = async() =>{
-        const response:AxiosResponse<any> = await $api.post('/findAll_account', {userId: props.userId})
-        if(response.status != 200) return
+        const response:AxiosResponse<any> = await $api.post('/findAll_account', {userId: store.user.id})
+        if(response?.status != 200) return
         setAllLoginAccount(response.data)
     }
     const removeLoginAccount = async(userId: any, idAccount: any) =>{
@@ -50,10 +55,23 @@ const FollowPosts: FC<any> = (props) =>{
             setLoginAccount('')
     }
 
-    useEffect(() => {
-        getAllNameAccount();
-      }, []);
+    const getPosts = async() =>{
+        if(props.dataFacebook.isAuth){
+            const responses: any = await $api.post('/test_fb', {token: props.dataFacebook.token, loginData:allLoginAccount})
+                console.log(responses)
+            if(responses.status == 200){
+                let sort: any = responses?.data?.sort((a: any, b: any) => {
+                   return b.like_count - a.like_count
+                })
+                setallPosts(sort)
+            }
+        }
 
+    }
+
+    useEffect(() => {
+            getAllNameAccount();
+      }, []);
     return(
         <div className='FollowPosts'>
             <div className="find-acount">
@@ -84,14 +102,16 @@ const FollowPosts: FC<any> = (props) =>{
                 })}
 
             </div>
-            <button>Получить посты</button>
+            <button onClick={getPosts}>Получить посты</button>
             <div className="allPosts">
-
-                <Post {...example} />
+                {allPosts.map((example: any) =>{
+                   return <Post {...example} />
+                })}
+                
 
             </div>
         </div>
     )
 }
 
-export default FollowPosts
+export default observer(FollowPosts)

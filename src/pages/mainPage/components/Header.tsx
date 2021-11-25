@@ -2,7 +2,6 @@ import React, {FC, useContext, useState} from "react";
 import '../styles/Header.css'
 
 const HeaderComponent: FC<any> = ({setRegistration, setLogin}) =>{
-    console.log(setRegistration)
     return(
         <div className='header'>
             <div className='container'>
