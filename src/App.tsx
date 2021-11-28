@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '.';
-import HeaderMain from './components/HeaderMain';
+import MainWrapper from './components/MainWrapper';
 import LoginForm from './components/LoginForm';
 import SideBar from './components/SideBar';
 import { IUser } from './models/IUser';
@@ -14,6 +14,7 @@ function App() {
     const {store} = useContext(Context);
     const [users, setUsers] = useState<IUser[]>([])
     const [dataFacebook, setdataFacebook] = useState({})
+    const [openMenu, setopenMenu] = useState(false)
   useEffect(()=>{
     if(localStorage.getItem('token')){
       store.checkAuth()
@@ -41,9 +42,9 @@ function App() {
 
   return (
     <div >
-      <HeaderMain dataFacebook={dataFacebook} setDataFacebook={setdataFacebook} email={store.user.email} />
-      <SideBar />
-      <FollowPosts dataFacebook={dataFacebook}  userId={store.user.id} />
+      <MainWrapper userId={store.user.id} openMenu={openMenu}  dataFacebook={dataFacebook} setDataFacebook={setdataFacebook} email={store.user.email} />
+      <SideBar openMenu={openMenu} setopenMenu={setopenMenu} />
+      {/* <FollowPosts dataFacebook={dataFacebook}  userId={store.user.id} /> */}
       {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>
       <button onClick={() => store.logout()} >Выйти</button>

@@ -1,0 +1,39 @@
+.header__main{  
+    height: 70px; 
+}
+
+.header__main__wrapper{
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 80px;
+    
+}
+
+
+
+.header__info{
+    font-size: 20px;
+    color: #C4C4C4;
+}
+.header__facebook-button{
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 10px 10px 45px;
+    background-color: #3B5998;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.img-facebook{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header__info{
+    margin-left: 40px;
+}

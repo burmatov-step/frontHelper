@@ -1,0 +1,7 @@
+.mainWrapper{
+    height: 100vh;
+    background: rgb(47, 52, 55);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    transition: all .3s;
+}

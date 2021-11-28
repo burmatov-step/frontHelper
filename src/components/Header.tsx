@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
 import React, {FC, useContext, useEffect, useState} from "react";
 import { Context } from "..";
-import '../styles/HeaderMain.css'
+import '../styles/Header.css'
 import $api from '../http/index'
 
 
 
-const HeaderMain: FC<any> = (props) =>{
+const Header: FC<any> = (props) =>{
     window.fbAsyncInit = function() {
     };
 
@@ -33,7 +33,7 @@ const HeaderMain: FC<any> = (props) =>{
     //     })
     //   },[])
 
-    const fff = () =>{
+    const login = () =>{
         FB.login(async (response: fb.StatusResponse) => {
             console.log(response);
             console.log(response.status);
@@ -46,24 +46,34 @@ const HeaderMain: FC<any> = (props) =>{
             }
         });
     }
-    const fff2 = () =>{
+    const logout = () =>{
         FB.logout(async (response: fb.StatusResponse) => {
             props.setDataFacebook({})
 
         });
     }
+
+
     
     return(
-        <header className='mainHeader'>
-            <div className="mainHeader__info">
-                {props.email}
+        <header className='header__main'>
+            <div className="header__main__wrapper">
+                    <div className="header__facebook-button">
+                        <img className="img-facebook" src="./facebook.svg" alt="" />
+                        Connect with Facebook
+                    </div>
+                    <div className="header__info">
+                        {props.email}
+                    </div>
+
             </div>
-            {props.dataFacebook.isAuth ?
+
+            {/* {props.dataFacebook.isAuth ?
             <button onClick={fff2} >logout</button>:
-            <button onClick={fff} >login</button>}
+            <button onClick={fff} >login</button>} */}
             
         </header>
     )
 }
 
-export default HeaderMain
+export default Header
