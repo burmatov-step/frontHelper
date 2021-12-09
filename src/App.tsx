@@ -9,6 +9,9 @@ import FollowPosts from './pages/followPosts/FollowPosts';
 import MainPage from './pages/mainPage/MainPage';
 import UserService from './services/UserService';
 import './styles/App.css'
+import {
+  BrowserRouter
+} from "react-router-dom";
 
 function App() {
     const {store} = useContext(Context);
@@ -42,8 +45,11 @@ function App() {
 
   return (
     <div >
+      <BrowserRouter>
       <MainWrapper userId={store.user.id} openMenu={openMenu}  dataFacebook={dataFacebook} setDataFacebook={setdataFacebook} email={store.user.email} />
       <SideBar openMenu={openMenu} setopenMenu={setopenMenu} />
+      </BrowserRouter>
+
       {/* <FollowPosts dataFacebook={dataFacebook}  userId={store.user.id} /> */}
       {/* <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}</h1>

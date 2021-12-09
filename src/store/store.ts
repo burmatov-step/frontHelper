@@ -8,7 +8,9 @@ import AuthService from "../services/AuthService";
 export default class Store{
     user = {} as IUser;
     isAuth = false;
-    isLoading = false
+    isLoading = false;
+    page = ''
+
 
     constructor(){
         makeAutoObservable(this)
@@ -16,6 +18,10 @@ export default class Store{
 
     setAuth(bool: boolean){
         this.isAuth = bool
+    }
+
+    setPage(name: string){
+        this.page = name
     }
 
     setUser(user: IUser){

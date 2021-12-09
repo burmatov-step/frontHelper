@@ -1,0 +1,29 @@
+.allPosts{
+    padding-top: 40px;
+    padding-right: 80px;
+    padding-left: 45px;
+    height: 100%;
+}
+
+.allPosts__wrapper{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.allPosts__posts-title{
+    font-size: 24px;
+    color: #c4c4c4;
+    margin-bottom: 20px;
+}
+
+.planning__button{
+    color: #C4C4C4;
+    font-size: 14px;
+    padding: 10px 40px;
+    background-color: #474C50;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}

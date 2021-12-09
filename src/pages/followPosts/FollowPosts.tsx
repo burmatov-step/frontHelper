@@ -4,7 +4,6 @@ import Post from "../followPosts/components/Post";
 import { Context } from '../../index';
 import './styles/FollowPosts.css'
 import $api from '../../http/index'
-import { AiOutlineDelete } from "react-icons/ai";
 import { AxiosResponse } from "axios";
 const FollowPosts: FC<any> = (props) =>{
     const {store} = useContext(Context);
@@ -143,13 +142,13 @@ const FollowPosts: FC<any> = (props) =>{
         }
 
     }
-    console.log(allTypeAccount)
     useEffect(() => {
         getAllTypeAcconunt()
+        store.setPage('find')
       }, []);
     return(
         <div className='followPosts'>
-            <div className="followPosts__wrapper">
+            <div className="followPosts__wrapper">   
                 <div className="followPosts__posts">
                     <div className="followPosts__posts-title">
                         Посты

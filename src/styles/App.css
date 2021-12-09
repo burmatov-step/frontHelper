@@ -41,7 +41,10 @@ li{
     justify-content: center;
     transition: all .3s;
     cursor: pointer;
+}
 
+.sidebar-menu__item.active{
+    background-color: #486278;
 }
 
 .sidebar-menu__item:hover{

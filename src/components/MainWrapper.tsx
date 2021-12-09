@@ -5,33 +5,15 @@ import '../styles/MainWrapper.css'
 import $api from '../http/index'
 import Header from './Header'
 import FollowPosts from "../pages/followPosts/FollowPosts";
+import PagePosts from "../pages/pagePosts/PagePosts";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Navigate
+  } from "react-router-dom";
 
 const MainWrapper: FC<any> = (props) =>{
-    window.fbAsyncInit = function() {
-    };
-
-
-
-    // useEffect(()=>{
-
-    //     FB.init({
-    //         appId: '454732159123529',
-    //         version: 'v11.0',
-    //         status: true,
-    //         cookie: true,
-    //         xfbml: true,
-    //         autoLogAppEvents: false
-    //     });
-    //     FB.getLoginStatus(async(response:fb.StatusResponse) =>{
-
-    //         if(response.status == "connected"){
-    //             props.setDataFacebook({
-    //                 isAuth: true,
-    //                 token: response.authResponse.accessToken
-    //             })
-    //         }
-    //     })
-    //   },[])
 
     const fff = () =>{
         FB.login(async (response: fb.StatusResponse) => {
@@ -49,7 +31,6 @@ const MainWrapper: FC<any> = (props) =>{
     const fff2 = () =>{
         FB.logout(async (response: fb.StatusResponse) => {
             props.setDataFacebook({})
-
         });
     }
 
@@ -61,8 +42,12 @@ const MainWrapper: FC<any> = (props) =>{
     
     return(
         <div className='mainWrapper' style={styles.mainWrapper}>
-            <Header email={props.email} />     
-            <FollowPosts userId={props.userId} />       
+            <Header email={props.email} />  
+                <Routes>
+                    <Route path="/" element={<Navigate to="/find" />} />
+                    <Route path="/find" element={<FollowPosts userId={props.userId} />} />
+                    <Route path="/posts" element={<PagePosts />} />
+                </Routes>
         </div>
     )
 }
