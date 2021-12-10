@@ -1,0 +1,61 @@
+.settingAccount{
+    padding: 40px 80px 0 45px;
+    height: 100%;
+    color: #C4C4C4;
+}
+
+.settingAccount-title{
+    font-size: 24px;
+    color: #c4c4c4;
+    margin-bottom: 60px;
+}
+
+.settingAccount__change{
+    margin-bottom: 80px;
+}
+
+.settingAccount__change-item{
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.settingAccount_label{
+    color: #C4C4C4;
+    font-size: 13px;
+    width: 100%;
+}
+
+.settingAccount__change-select__wrapper{
+    position: relative;
+    width: 235px;
+}
+
+.settingAccount_label select{
+    width: 100%;
+    height: 40px;
+    background-color: #474C50;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: none;
+    color: #C4C4C4;
+    padding-left: 10px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.settingAccount-select__arrow{
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    cursor: pointer;
+}
+
+.settingAccount-allAccount{
+    width: 237px;
+    height: 180px;
+    background: #474C50;
+    border-radius: 10px;
+    padding: 12px;
+}

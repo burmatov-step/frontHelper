@@ -192,7 +192,6 @@ const FollowPosts: FC<any> = (props) =>{
                                     </select>
                                     <img className='followPosts-select__arrow' src="./arrow.svg" alt="" />
                                 </div>
-
                             </label>
                         </div>
                         <div className="followPosts__setting-info__accoundAdd">

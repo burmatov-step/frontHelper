@@ -10,10 +10,10 @@ const SideBar: FC<any> = (props) =>{
     let navigate = useNavigate();
     const styles = {
         sideBar: {
-            width: props.openMenu ? '100px' : '50px',
+            width: props.openMenu ? '125px' : '50px',
         },
         span: {
-            width: props.openMenu ? '50px' : '0',
+            width: props.openMenu ? '75px' : '0',
         }
     };
 
@@ -30,6 +30,10 @@ const SideBar: FC<any> = (props) =>{
                 <li className={`sidebar-menu__item ${store.page == 'posts' ? 'active' : ''}`} onClick={() =>{navigate('/posts')}} onMouseOver={() => props.setopenMenu(true)} onMouseOut={() => props.setopenMenu(false)}>
                     <img src="./calendar.svg" alt="" />
                     <span style={styles.span}>Посты</span>
+                </li>
+                <li className={`sidebar-menu__item ${store.page == 'accounts' ? 'active' : ''}`} onClick={() =>{navigate('/accounts')}} onMouseOver={() => props.setopenMenu(true)} onMouseOut={() => props.setopenMenu(false)}>
+                    <img src="./users.svg" alt="" />
+                    <span style={styles.span}>Аккаунты</span>
                 </li>
             </ul>
         </div>

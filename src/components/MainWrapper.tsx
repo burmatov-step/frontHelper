@@ -6,6 +6,7 @@ import $api from '../http/index'
 import Header from './Header'
 import FollowPosts from "../pages/followPosts/FollowPosts";
 import PagePosts from "../pages/pagePosts/PagePosts";
+import SettingAccount from "../pages/settingAccount/SettingAccount";
 import {
     BrowserRouter,
     Routes,
@@ -36,7 +37,7 @@ const MainWrapper: FC<any> = (props) =>{
 
     const styles = {
         mainWrapper: {
-            marginLeft: props.openMenu ? '100px' : '50px',
+            marginLeft: props.openMenu ? '125px' : '50px',
         }
     };
     
@@ -47,6 +48,7 @@ const MainWrapper: FC<any> = (props) =>{
                     <Route path="/" element={<Navigate to="/find" />} />
                     <Route path="/find" element={<FollowPosts userId={props.userId} />} />
                     <Route path="/posts" element={<PagePosts />} />
+                    <Route path="/accounts" element={<SettingAccount />} />
                 </Routes>
         </div>
     )
