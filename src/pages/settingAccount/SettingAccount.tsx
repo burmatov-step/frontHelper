@@ -30,14 +30,17 @@ const SettingAccount: FC = () =>{
             Подключенные аккаунты
             </div>
             <div className="settingAccount-allAccount">
-                <div  className="allAccounts_item">
-                    <div className="allAccounts_item-text">
-                        mama.kulinarr
-                    </div>
-                    <div className="allAccounts_item-del">
-                        <img src="./delete.svg" alt="" />
-                    </div>
-                </div>
+                {store.allUsersInsta.map((user: any) =>{
+                 return <div key={user.username} className="allAccounts_item">
+                            <div className="allAccounts_item-text">
+                               {user.username}
+                            </div>
+                            <div className="allAccounts_item-del">
+                                <img src="./delete.svg" alt="" />
+                            </div>
+                        </div>
+                })}
+
             </div>
 
         </div>

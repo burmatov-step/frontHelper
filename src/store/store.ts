@@ -9,7 +9,8 @@ export default class Store{
     user = {} as IUser;
     isAuth = false;
     isLoading = false;
-    page = ''
+    page = '';
+    allUsersInsta =[{username: 'mamin.club'}];
 
 
     constructor(){
@@ -26,6 +27,9 @@ export default class Store{
 
     setUser(user: IUser){
         this.user = user
+    }
+    setallUsersInsta(allUsersInsta: any){
+        this.allUsersInsta = allUsersInsta
     }
 
     setLoading(bool: boolean){

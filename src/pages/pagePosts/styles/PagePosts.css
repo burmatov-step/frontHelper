@@ -211,3 +211,185 @@
     font-size: 14px;
     overflow: hidden;
 }
+
+.post__popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.post__popup-wrapper{
+    max-width: 590px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #2F3437;
+    padding: 23px 30px;
+    position: relative;
+}
+
+.post__popup-close{
+    position: absolute;
+    top: 23px;
+    right: 32px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.post__popup-title{
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.post__popup-text textarea{
+    width: 100%;
+    height: 150px;
+    background-color: #474C50;
+    border-radius: 20px;
+    border: none;
+    resize: none;
+    color: #C4C4C4;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 14px 17px;
+}
+
+.post__popup-upload{
+    width: 154px;
+    height: 32px;
+    background: #474C50;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.post__popup-upload input{
+    display: none;
+}
+
+.post__popup-upload:hover{
+    background-color: #3E4549;
+}
+
+.post__popup-uploadIcon{
+    width: 20px;
+    height: 20px;
+}
+
+.post__popup-upload_text{
+    color: #C4C4C4;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.post__popup-select__wrapper{
+    position: relative;
+}
+
+.post__popup-label select{
+    width: 100%;
+    height: 40px;
+    background-color: #474C50;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: none;
+    color: #C4C4C4;
+    padding-left: 10px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.post__popup-select__arrow{
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    cursor: pointer;
+}
+
+.selected__account{
+    background: #474C50;
+    width: 100%;
+    border-radius: 20px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.selected__account-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.selected__account-calendar{
+    display: flex;
+    background-color: #2F3437;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    position: relative;
+}
+
+.calendar-date{
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.calendar__icon{
+    width: 14px;
+    height: 15px;
+    margin-left: 5px;
+    pointer-events: none;
+}
+
+.selected__account-time-wrapper{
+    position: relative;
+}
+
+.selected__account-label select{
+    width: 44px;
+    margin-left: 2px;
+    padding-left: 5px;
+    height: 25px;
+    background-color: #2F3437;
+    border: none;
+    color: #C4C4C4;
+    padding-right: 3px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.selected__account__arrow{
+    position: absolute;
+    right: 3px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.open-calendar{
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

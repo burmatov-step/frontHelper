@@ -2,12 +2,18 @@ import React, {FC, useContext, useEffect, useState} from "react";
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
 import PostPlanning from './components/PostPlanning'
+import PostPopup from './components/PostPopup'
 import './styles/PagePosts.css'
 const PagePosts: FC = () =>{
     const {store} = useContext(Context);
+    const [isPopup, setIsPopup] = useState(false)
+    const planingHandler = () =>{
+        setIsPopup(true)
+    }
     useEffect(() => {
         store.setPage('posts')
       }, []);
+
     return(
         <div className='allPosts__planning'>
             <div className="allPosts__wrapper">
@@ -15,7 +21,7 @@ const PagePosts: FC = () =>{
                     <div className="allPosts__posts-title">
                         Посты
                     </div>
-                    <button className='planning__button'>
+                    <button className='planning__button' onClick={planingHandler}>
                         Запланировать пост
                     </button>
                     <div className="allPosts__content-info">
@@ -44,7 +50,7 @@ const PagePosts: FC = () =>{
                                 </div>
                             </div>
                             <div className="allPosts__content-posts">
-                                <PostPlanning />
+                                <PostPlanning  />
                             </div>
                     </div>
 
@@ -93,6 +99,7 @@ const PagePosts: FC = () =>{
                         </div>
                 </div>
             </div>
+            {isPopup && <PostPopup setIsPopup={setIsPopup} />}
         </div>
     )
 }

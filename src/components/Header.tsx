@@ -5,12 +5,19 @@ import '../styles/Header.css'
 import $api from '../http/index'
 
 
-
 const Header: FC<any> = (props) =>{
+    const {store} = useContext(Context);
     window.fbAsyncInit = function() {
     };
 
-
+    const checkFbAccount = async(userId: any, token: any, userIdFb: any) =>{
+        const response: any = await $api.post('/check', {userId, token, userIdFb})
+        if(response.status == 200){
+            store.setallUsersInsta(response.data)
+            console.log(response)
+        }
+        
+    }
 
     // useEffect(()=>{
 
@@ -25,13 +32,15 @@ const Header: FC<any> = (props) =>{
     //     FB.getLoginStatus(async(response:fb.StatusResponse) =>{
 
     //         if(response.status == "connected"){
-    //             props.setDataFacebook({
+    //             console.log(response)
+    //             props.setdataFacebook({
     //                 isAuth: true,
     //                 token: response.authResponse.accessToken
     //             })
+    //             checkFbAccount(props.userId, response.authResponse.accessToken, response.authResponse.userID)
     //         }
     //     })
-    //   },[])
+    // },[])
 
     const login = () =>{
         FB.login(async (response: fb.StatusResponse) => {
@@ -39,7 +48,7 @@ const Header: FC<any> = (props) =>{
             console.log(response.status);
             console.log(response.authResponse.accessToken);
             if(response.authResponse.accessToken){
-                props.setDataFacebook({
+                props.setdataFacebook({
                     isAuth: true,
                     token: response.authResponse.accessToken
                 })
@@ -48,7 +57,7 @@ const Header: FC<any> = (props) =>{
     }
     const logout = () =>{
         FB.logout(async (response: fb.StatusResponse) => {
-            props.setDataFacebook({})
+            props.setdataFacebook({})
 
         });
     }
@@ -76,4 +85,4 @@ const Header: FC<any> = (props) =>{
     )
 }
 
-export default Header
+export default observer(Header)
