@@ -43,10 +43,10 @@ const MainWrapper: FC<any> = (props) =>{
     
     return(
         <div className='mainWrapper' style={styles.mainWrapper}>
-            <Header email={props.email} />  
+            <Header userId={props.userId} setDataFacebook={props.setDataFacebook} email={props.email} />  
                 <Routes>
                     <Route path="/" element={<Navigate to="/find" />} />
-                    <Route path="/find" element={<FollowPosts userId={props.userId} />} />
+                    <Route path="/find" element={<FollowPosts userId={props.userId} dataFacebook={props.dataFacebook} />} />
                     <Route path="/posts" element={<PagePosts />} />
                     <Route path="/accounts" element={<SettingAccount />} />
                 </Routes>

@@ -9,14 +9,16 @@ const Header: FC<any> = (props) =>{
     const {store} = useContext(Context);
     window.fbAsyncInit = function() {
     };
+    const saveTokenFb = async (userId: any, tokenFb: any, userIdFb: any) =>{
+        const response: any = await $api.post('/createToken', {userId, tokenFb, userIdFb})
+        console.log(response)
+    }
 
     const checkFbAccount = async(userId: any, token: any, userIdFb: any) =>{
         const response: any = await $api.post('/check', {userId, token, userIdFb})
         if(response.status == 200){
             store.setallUsersInsta(response.data)
-            console.log(response)
         }
-        
     }
 
     // useEffect(()=>{
@@ -30,34 +32,37 @@ const Header: FC<any> = (props) =>{
     //         autoLogAppEvents: false
     //     });
     //     FB.getLoginStatus(async(response:fb.StatusResponse) =>{
-
+    //         console.log(response)
     //         if(response.status == "connected"){
     //             console.log(response)
-    //             props.setdataFacebook({
+    //             props.setDataFacebook({
     //                 isAuth: true,
     //                 token: response.authResponse.accessToken
     //             })
     //             checkFbAccount(props.userId, response.authResponse.accessToken, response.authResponse.userID)
+    //             saveTokenFb(props.userId, response.authResponse.accessToken, response.authResponse.userID)
     //         }
     //     })
     // },[])
 
     const login = () =>{
-        FB.login(async (response: fb.StatusResponse) => {
+       FB.login( (response: fb.StatusResponse) => {
             console.log(response);
             console.log(response.status);
             console.log(response.authResponse.accessToken);
             if(response.authResponse.accessToken){
-                props.setdataFacebook({
+                props.setDataFacebook({
                     isAuth: true,
                     token: response.authResponse.accessToken
                 })
+                checkFbAccount(props.userId, response.authResponse.accessToken, response.authResponse.userID)
+                saveTokenFb(props.userId, response.authResponse.accessToken, response.authResponse.userID)
             }
         });
     }
     const logout = () =>{
         FB.logout(async (response: fb.StatusResponse) => {
-            props.setdataFacebook({})
+            props.setDataFacebook({})
 
         });
     }
@@ -67,7 +72,7 @@ const Header: FC<any> = (props) =>{
     return(
         <header className='header__main'>
             <div className="header__main__wrapper">
-                    <div className="header__facebook-button">
+                    <div className="header__facebook-button" onClick={login}>
                         <img className="img-facebook" src="./facebook.svg" alt="" />
                         Connect with Facebook
                     </div>

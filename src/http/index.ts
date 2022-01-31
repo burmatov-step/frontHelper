@@ -2,7 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { config } from 'process'
 import { AuthResponse } from '../models/response/AuthResponse'
 
-export const API_URL = 'http://localhost:5000/api'
+// export const API_URL = 'http://localhost:5000/api'
+export const API_URL = 'https://powerful-ridge-23582.herokuapp.com/api'
 
 const $api = axios.create({
     withCredentials: true,

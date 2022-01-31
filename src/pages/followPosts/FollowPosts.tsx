@@ -130,6 +130,7 @@ const FollowPosts: FC<any> = (props) =>{
     }
 
     const getPosts = async() =>{
+        console.log(props.dataFacebook)
         if(props.dataFacebook.isAuth){
             const responses: any = await $api.post('/test_fb', {token: props.dataFacebook.token, loginData:allLoginAccount})
                 console.log(responses)
@@ -224,7 +225,7 @@ const FollowPosts: FC<any> = (props) =>{
                                 })}
                             </div>
                         </div>
-                        <div className="followPosts__setting-getPost">
+                        <div className="followPosts__setting-getPost" onClick={getPosts}>
                             <button className='getPost-button'>
                                 Получить посты
                             </button>
