@@ -4,28 +4,49 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '../../../index';
 import SelectedAccount from './SelectedAccount'
 import FileService from '../../../services/FileService'
+import PreviewPost from './PreviewPopup'
+import FileReader from '@tanker/file-reader';
 const PostPopup: FC<any> = (props) =>{
     const {store} = useContext(Context);
-    const [selectedAccount, setSelectedAccount] = useState([{id: 1, username: 'mamin.club'}])
+    const [selectedAccount, setSelectedAccount] = useState([])
     const [dataTime, setdataTime] = useState(new Date())
+    const [previewPost, setPreviewPost] = useState(false)
     const [minuteTime, setMinuteTime] = useState(0)
+    const [currentTime, setCurrentTime] = useState('0')
     const [usernameAccount, setUsernameAccount] = useState('')
     const [hoursTime, setHoursTime] = useState(0)
     const [textPost, setTextPost] = useState('')
+    const [previewUrl, setPreviewUrl] = useState('')
     const [file, setFile] = useState({})
-    const planningHandler = ()=>{
-        var x = new Date();
-        var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60;
+    const planningHandler = async()=>{
+        store.setPreloader(true)
         const data = dataTime.setHours(hoursTime, minuteTime)
-        FileService.uploadFile(file, data, textPost, usernameAccount)
+        const response = await FileService.uploadFile(file, data, textPost, usernameAccount, currentTime);
+        if(response?.status == 200){
+            props.setIsPopup(false)
+        }else{
+            alert('ошибка')
+        }
+        store.setPreloader(false)
     }
-    console.log('usernameAccount', usernameAccount)
-    useEffect(() => {
-        store.setPage('accounts')
-      }, []);
 
-      const fileUploadHandler = (event:any) =>{
-          setFile([...event.target.files][0])
+    const selectedAccauntHandler = (e:any) =>{
+        const accauntData:any = [...selectedAccount, store.allUsersInsta.find((item) => item.username == e.target.value)] 
+        accauntData && setSelectedAccount(accauntData)
+    }
+
+      const fileUploadHandler = async(event:any) =>{
+        let filesd
+        if(event.target.files && event.target.files[0]){
+            filesd = event.target.files[0];
+
+            const reader = new FileReader(filesd);
+            const dataUrl = await reader.readAsDataURL();
+            setPreviewUrl(dataUrl)
+            console.log(dataUrl)
+              setFile([...event.target.files][0])
+        }
+
     }
     return(
         <div className='post__popup'>
@@ -51,10 +72,18 @@ const PostPopup: FC<any> = (props) =>{
                         Фото/Видео
                     </div>
                 </label>
+                {previewUrl.length > 1 &&
+                <div className="preview">
+                    <div className="preview__edit" onClick={() => setPreviewPost(true)}>
+                        <img src="./pencil.svg" alt="" />
+                    </div>
+                    <video src={previewUrl}></video>
+                </div>}
+
 
                 <div className="post__popup-selected_wrapper">
 
-                    {selectedAccount.map((account) =>{
+                    {selectedAccount.map((account:any) =>{
                        return <SelectedAccount 
                        accountName={account.username}
                        setdataTime={setdataTime}
@@ -67,7 +96,7 @@ const PostPopup: FC<any> = (props) =>{
                 <label className='post__popup-label' >
                     Добавьте страницу
                     <div className="post__popup-select__wrapper">
-                        <select >
+                        <select onChange={selectedAccauntHandler}>
                             <option>Добавить</option> 
                             {store.allUsersInsta.map((user) =>{
                                return <option>{user.username}</option>  
@@ -84,6 +113,7 @@ const PostPopup: FC<any> = (props) =>{
                 </div>
 
             </div>
+          {previewPost && <PreviewPost src={previewUrl} setCurrentTime={setCurrentTime} setPreviewPost={setPreviewPost} />}  
         </div>
     )
 }

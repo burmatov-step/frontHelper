@@ -1,18 +1,32 @@
 import React, {FC, useContext, useEffect, useState} from "react";
 import { observer } from 'mobx-react-lite';
+import $api from '../../http/index'
 import { Context } from '../../index';
 import PostPlanning from './components/PostPlanning'
 import PostPopup from './components/PostPopup'
+
 import './styles/PagePosts.css'
 const PagePosts: FC = () =>{
     const {store} = useContext(Context);
     const [isPopup, setIsPopup] = useState(false)
+    const [postsPlan, setPostsPlan] = useState([])
     const planingHandler = () =>{
         setIsPopup(true)
     }
+
+    const getPosts = async() =>{
+        const response  = await $api.get('/getAllPost')
+        if(response.status == 200){
+            setPostsPlan(response.data)
+        }
+        console.log(response)
+    }
     useEffect(() => {
         store.setPage('posts')
+        getPosts()
       }, []);
+
+      console.log(postsPlan)
 
     return(
         <div className='allPosts__planning'>
@@ -50,7 +64,10 @@ const PagePosts: FC = () =>{
                                 </div>
                             </div>
                             <div className="allPosts__content-posts">
-                                <PostPlanning  />
+                                {postsPlan.map((postData:any) =>{
+                                    return <PostPlanning key={postData._id} postData={postData}  />
+                                })}
+                                
                             </div>
                     </div>
 

@@ -8,6 +8,7 @@ import { IUser } from './models/IUser';
 import FollowPosts from './pages/followPosts/FollowPosts';
 import MainPage from './pages/mainPage/MainPage';
 import UserService from './services/UserService';
+import Preloader from './components/Preloader'
 import './styles/App.css'
 import {
   BrowserRouter
@@ -48,6 +49,7 @@ function App() {
       <BrowserRouter>
       <MainWrapper userId={store.user.id} openMenu={openMenu}  dataFacebook={dataFacebook} setDataFacebook={setdataFacebook} email={store.user.email} />
       <SideBar openMenu={openMenu} setopenMenu={setopenMenu} />
+        {store.preloader && <Preloader />}
       </BrowserRouter>
 
       {/* <FollowPosts dataFacebook={dataFacebook}  userId={store.user.id} /> */}

@@ -9,6 +9,7 @@ export default class Store{
     user = {} as IUser;
     isAuth = false;
     isLoading = false;
+    preloader = false;
     page = '';
     allUsersInsta =[{username: 'mamin.club'}];
 
@@ -34,6 +35,10 @@ export default class Store{
 
     setLoading(bool: boolean){
         this.isLoading = bool
+    }
+
+    setPreloader(bool:boolean){
+        this.preloader = bool
     }
 
     async login(email: string, password: string){

@@ -21,29 +21,29 @@ const Header: FC<any> = (props) =>{
         }
     }
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    //     FB.init({
-    //         appId: '454732159123529',
-    //         version: 'v11.0',
-    //         status: true,
-    //         cookie: true,
-    //         xfbml: true,
-    //         autoLogAppEvents: false
-    //     });
-    //     FB.getLoginStatus(async(response:fb.StatusResponse) =>{
-    //         console.log(response)
-    //         if(response.status == "connected"){
-    //             console.log(response)
-    //             props.setDataFacebook({
-    //                 isAuth: true,
-    //                 token: response.authResponse.accessToken
-    //             })
-    //             checkFbAccount(props.userId, response.authResponse.accessToken, response.authResponse.userID)
-    //             saveTokenFb(props.userId, response.authResponse.accessToken, response.authResponse.userID)
-    //         }
-    //     })
-    // },[])
+        FB.init({
+            appId: '454732159123529',
+            version: 'v11.0',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            autoLogAppEvents: false
+        });
+        FB.getLoginStatus(async(response:fb.StatusResponse) =>{
+            console.log(response)
+            if(response.status == "connected"){
+                console.log(response)
+                props.setDataFacebook({
+                    isAuth: true,
+                    token: response.authResponse.accessToken
+                })
+                checkFbAccount(props.userId, response.authResponse.accessToken, response.authResponse.userID)
+                saveTokenFb(props.userId, response.authResponse.accessToken, response.authResponse.userID)
+            }
+        })
+    },[])
 
     const login = () =>{
        FB.login( (response: fb.StatusResponse) => {
