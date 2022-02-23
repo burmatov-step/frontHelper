@@ -43,7 +43,7 @@ const PostPlanning: FC<any>  = (props:any) =>{
                     <img src="https://vjoy.cc/wp-content/uploads/2020/10/dlya_dushi_35_13130628.jpg" alt="" />
                 </div>
                 <div className="post__planning-text">
-                    {props?.postData?.text}
+                    {encodeURIComponent(props?.postData?.text)}
                 </div>
             </div>
 

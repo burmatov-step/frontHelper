@@ -18,9 +18,7 @@ const MainWrapper: FC<any> = (props) =>{
 
     const fff = () =>{
         FB.login(async (response: fb.StatusResponse) => {
-            console.log(response);
-            console.log(response.status);
-            console.log(response.authResponse.accessToken);
+
             if(response.authResponse.accessToken){
                 props.setDataFacebook({
                     isAuth: true,

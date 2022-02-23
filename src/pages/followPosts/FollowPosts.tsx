@@ -7,6 +7,7 @@ import $api from '../../http/index'
 import { AxiosResponse } from "axios";
 const FollowPosts: FC<any> = (props) =>{
     const {store} = useContext(Context);
+
     const [loginAccount, setLoginAccount] = useState('')
     const [typeAccount, setTypeAccount] = useState('')
     const [globalTypeAccount, setglobalTypeAccount] = useState('')
@@ -98,49 +99,77 @@ const FollowPosts: FC<any> = (props) =>{
         "id": "17929645738888369"
     }])
     const getAllNameAccount = async(type: any) =>{
+        store.setPreloader(true)
         const response:AxiosResponse<any> = await $api.post('/findAll_account', {userId: store.user.id, type})
-        if(response?.status != 200) return
+        if(response?.status != 200){
+            store.setPreloader(false)
+            return
+        }
         setAllLoginAccount(response.data)
+        store.setPreloader(false)
     }
     const removeLoginAccount = async(userId: any, idAccount: any) =>{
+        store.setPreloader(true)
         const response:AxiosResponse<any> = await $api.post('/delete_account', {userId, idAccount})
-        if(response.status != 200) return
+        if(response.status != 200){
+            store.setPreloader(false)
+            return
+        }
         // getAllNameAccount()
+        store.setPreloader(false)
     }
 
     const createLoginAccount = async(userId: any, login: any, type:any) =>{
-        const response = await $api.post('/create_find_account', {userId, login, type})
-        if(response.status != 200) return
+        store.setPreloader(true)
+        const response: any = await $api.post('/create_find_account', {userId, login, type})
+        
+        if(!response.data.success){
+            store.setPreloader(false)
+            alert(response.data.message)
+            return
+        } 
             getAllNameAccount(globalTypeAccount)
-            console.log(response)
             setLoginAccount('')
+            store.setPreloader(false)
     }
 
     const getAllTypeAcconunt = async() =>{
+        store.setPreloader(true)
         const response:AxiosResponse<any> = await $api.post('/findAll_type_account', {userId: store.user.id})
-        if(response.status != 200) return
+        if(response.status != 200){
+            store.setPreloader(false)
+            return
+        }
         setallTypeAccount(response.data)
+        store.setPreloader(false)
     }
 
     const createTypeAccount = async(userId: any, type: any) =>{
+        store.setPreloader(true)
         const response = await $api.post('/create_type_account', {userId, type})
-        if(response.status != 200) return
+        if(response.status != 200){
+            store.setPreloader(false)
+            return
+        }
         getAllTypeAcconunt()
         setTypeAccount('')
+        store.setPreloader(false)
     }
 
     const getPosts = async() =>{
-        console.log(props.dataFacebook)
+        store.setPreloader(true)
         if(props.dataFacebook.isAuth){
             const responses: any = await $api.post('/test_fb', {token: props.dataFacebook.token, loginData:allLoginAccount})
-                console.log(responses)
+                
             if(responses.status == 200){
                 let sort: any = responses?.data?.sort((a: any, b: any) => {
                    return b.like_count - a.like_count
                 })
                 setallPosts(sort)
+                store.setPreloader(false)
             }
         }
+        store.setPreloader(false)
 
     }
     useEffect(() => {
@@ -156,6 +185,7 @@ const FollowPosts: FC<any> = (props) =>{
                     </div>
                     <div className="all__find-posts">
                     {allPosts.map((example: any) =>{
+                        console.log('example', example)
                                 return <Post {...example} />
                                 })}
                     </div>

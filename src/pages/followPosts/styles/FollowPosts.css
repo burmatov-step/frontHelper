@@ -15,6 +15,19 @@
     max-width: 235px;
     width: 100%;
     margin-left: 75px;
+    overflow: auto;
+    height: calc(100% - 70px);
+}
+
+.followPosts__setting::-webkit-scrollbar {
+    width: 3px; /* ширина для вертикального скролла */
+    height: 8px; /* высота для горизонтального скролла */
+    background-color: #474C50;
+}
+
+.followPosts__setting::-webkit-scrollbar-thumb {
+    background-color: #C4C4C4;
+    border-radius: 10px;
 }
 
 .followPosts__posts{

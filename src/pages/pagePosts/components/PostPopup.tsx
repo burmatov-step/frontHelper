@@ -20,13 +20,19 @@ const PostPopup: FC<any> = (props) =>{
     const [file, setFile] = useState({})
     const planningHandler = async()=>{
         store.setPreloader(true)
-        const data = dataTime.setHours(hoursTime, minuteTime)
-        const response = await FileService.uploadFile(file, data, textPost, usernameAccount, currentTime);
-        if(response?.status == 200){
-            props.setIsPopup(false)
+        const video: any = document.querySelector('video')
+        if(video.duration < 60){
+            const data = dataTime.setHours(hoursTime, minuteTime)
+            const response = await FileService.uploadFile(file, data, textPost, usernameAccount, currentTime);
+            if(response?.status == 200){
+                props.setIsPopup(false)
+            }else{
+                alert('ошибка')
+            }
         }else{
-            alert('ошибка')
+            alert('Видео больше 60 секунд')
         }
+
         store.setPreloader(false)
     }
 
@@ -43,7 +49,7 @@ const PostPopup: FC<any> = (props) =>{
             const reader = new FileReader(filesd);
             const dataUrl = await reader.readAsDataURL();
             setPreviewUrl(dataUrl)
-            console.log(dataUrl)
+            console.log('reader', reader)
               setFile([...event.target.files][0])
         }
 
