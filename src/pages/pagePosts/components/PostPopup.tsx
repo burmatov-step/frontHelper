@@ -21,7 +21,24 @@ const PostPopup: FC<any> = (props) =>{
     const planningHandler = async()=>{
         store.setPreloader(true)
         const video: any = document.querySelector('video')
-        if(video.duration < 60){
+        if(video.duration){
+            let isFormat = (video.videoWidth / video.videoHeight) >= 0.8 && (video.videoWidth / video.videoHeight) <= 1.7
+            console.log(isFormat)
+            console.log(video.videoWidth / video.videoHeight)
+            console.dir(video)
+            if(video.duration < 60 && isFormat){
+                const data = dataTime.setHours(hoursTime, minuteTime)
+                const response = await FileService.uploadFile(file, data, textPost, usernameAccount, currentTime);
+                if(response?.status == 200){
+                    props.setIsPopup(false)
+                }else{
+                    alert('ошибка')
+                }
+            }else{
+                alert('Видео больше 60 секунд, либо не верный формат')
+            }
+            console.dir(video)
+        }else{
             const data = dataTime.setHours(hoursTime, minuteTime)
             const response = await FileService.uploadFile(file, data, textPost, usernameAccount, currentTime);
             if(response?.status == 200){
@@ -29,9 +46,8 @@ const PostPopup: FC<any> = (props) =>{
             }else{
                 alert('ошибка')
             }
-        }else{
-            alert('Видео больше 60 секунд')
         }
+
 
         store.setPreloader(false)
     }

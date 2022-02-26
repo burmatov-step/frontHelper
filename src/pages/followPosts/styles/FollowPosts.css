@@ -32,6 +32,7 @@
 
 .followPosts__posts{
     height: 100%;
+    max-width: 82%;
 }
 
 .followPosts__setting-title,

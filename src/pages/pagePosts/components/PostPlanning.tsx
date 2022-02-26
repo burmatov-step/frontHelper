@@ -40,10 +40,14 @@ const PostPlanning: FC<any>  = (props:any) =>{
                     </div>
                 </div>
                 <div className="post__planning-content">
-                    <img src="https://vjoy.cc/wp-content/uploads/2020/10/dlya_dushi_35_13130628.jpg" alt="" />
+                    {/* <img src="https://vjoy.cc/wp-content/uploads/2020/10/dlya_dushi_35_13130628.jpg" alt="" /> */}
+                    <video width="250">
+                            <source src={props.postData.filePath}
+                                    type="video/mp4"></source>
+                        </video>
                 </div>
                 <div className="post__planning-text">
-                    {encodeURIComponent(props?.postData?.text)}
+                    {props?.postData?.text}
                 </div>
             </div>
 

@@ -121,8 +121,7 @@ const FollowPosts: FC<any> = (props) =>{
 
     const createLoginAccount = async(userId: any, login: any, type:any) =>{
         store.setPreloader(true)
-        const response: any = await $api.post('/create_find_account', {userId, login, type})
-        
+        const response: any = await $api.post('/create_find_account', {userId, login: login.trim(), type: type.trim()})
         if(!response.data.success){
             store.setPreloader(false)
             alert(response.data.message)
@@ -185,8 +184,9 @@ const FollowPosts: FC<any> = (props) =>{
                     </div>
                     <div className="all__find-posts">
                     {allPosts.map((example: any) =>{
-                        console.log('example', example)
+                            if(example.media_url){
                                 return <Post {...example} />
+                            }
                                 })}
                     </div>
                 </div>

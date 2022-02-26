@@ -64,8 +64,11 @@ const PagePosts: FC = () =>{
                                 </div>
                             </div>
                             <div className="allPosts__content-posts">
-                                {postsPlan.map((postData:any) =>{
-                                    return <PostPlanning key={postData._id} postData={postData}  />
+                                {postsPlan.sort((a:any, b:any) => +a.date > +b.date ? 1 : -1).map((postData:any) =>{
+                                    if(!postData.posting){
+                                        return <PostPlanning key={postData._id} postData={postData}  />
+                                    }
+                                    
                                 })}
                                 
                             </div>

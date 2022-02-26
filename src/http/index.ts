@@ -2,8 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { config } from 'process'
 import { AuthResponse } from '../models/response/AuthResponse'
 
-export const API_URL = 'http://localhost:5000/api'
-// export const API_URL = 'https://api.smmhelper.ru/api'
+// export const API_URL = 'http://localhost:5000/api'
+export const API_URL = 'https://api.smmhelper.ru/api'
 
 const $api = axios.create({
     withCredentials: true,
