@@ -20,7 +20,7 @@ const PostPopup: FC<any> = (props) =>{
     const [file, setFile] = useState({})
     const planningHandler = async()=>{
         store.setPreloader(true)
-        const video: any = document.querySelector('video')
+        const video: any = document.querySelector('.videoPreview')
         if(video.duration){
             let isFormat = (video.videoWidth / video.videoHeight) >= 0.8 && (video.videoWidth / video.videoHeight) <= 1.7
             console.log(isFormat)
@@ -99,7 +99,7 @@ const PostPopup: FC<any> = (props) =>{
                     <div className="preview__edit" onClick={() => setPreviewPost(true)}>
                         <img src="./pencil.svg" alt="" />
                     </div>
-                    <video src={previewUrl}></video>
+                    <video className="videoPreview" src={previewUrl}></video>
                 </div>}
 
 
